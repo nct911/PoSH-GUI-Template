@@ -1,0 +1,173 @@
+﻿<Window x:Class="System.Windows.Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:errordialogXaML"
+        Name="MainWindow"
+        Title="__DIALOGTITLE__"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        SizeToContent="WidthAndHeight"
+        Width="420"
+        MinWidth="420"
+        MaxWidth="700"
+        Height="212"
+        MinHeight="212"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Padding="20"
+        Margin="0"
+        ShowInTaskbar="False">
+    <Window.Resources>
+        
+        <!-- Button Template. This duplicates the one from ControlTemplates.XaML It's here to make sure this dialog is self contained -->
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFC2C2C2" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FFC2C2C2" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFC2C2C2" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FFC2C2C2" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FF606060" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF606060" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF0F0F0" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
+        <SolidColorBrush x:Key="Button.Default.Foreground" Color="White" />
+        <SolidColorBrush x:Key="Button.Default.Background" Color="#FF005FB8" />
+        <SolidColorBrush x:Key="Button.Default.Border" Color="#FF005FB8" />
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="8,0,8,4" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true" CornerRadius="4" Padding="0" Margin="0">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsDefault" Value="true">
+                    <Setter Property="BorderBrush" Value="{StaticResource Button.Default.Border}" />
+                    <Setter Property="Background" Value="{StaticResource Button.Default.Background}" />
+                    <Setter Property="Foreground" Value="{StaticResource Button.Default.Foreground}" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="{StaticResource Button.MouseOver.Background}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Button.MouseOver.Border}" />
+                </Trigger>
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background" Value="{StaticResource Button.Pressed.Background}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Button.Pressed.Border}" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Background" Value="{StaticResource Button.Disabled.Background}" />
+                    <Setter Property="BorderBrush" Value="{StaticResource Button.Disabled.Background}" />
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource Button.Disabled.Foreground}" />
+                </Trigger>
+
+            </Style.Triggers>
+        </Style>
+        
+        <!-- TextBox Template. Also a duplicate from ControlTemplates.XaML and included to keep this self-contained. -->
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#7F7A7A7A" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF005FB8" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF005FB8" />
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="FontFamily" Value="Segoe UI" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="true">
+                                <Setter Property="Opacity" TargetName="border" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
+                                <Setter Property="BorderThickness" TargetName="border" Value="0,0,0,2" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                        <Condition Property="IsSelectionActive" Value="false" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- A small styler to make the window border respond to being focused or unfocused -->
+        <Style TargetType="Window">
+            <Style.Triggers>
+                <Trigger Property="IsActive" Value="False">
+                    <Setter Property="BorderBrush" Value="#FFAAAAAA" />
+                </Trigger>
+                <Trigger Property="IsActive" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF005FB8" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0" ResizeBorderThickness="2" CornerRadius="8" />
+    </WindowChrome.WindowChrome>
+
+    <Border BorderThickness="1" BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Background="White" CornerRadius="8" Margin="10,10,10,10">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="10" ShadowDepth="5" Color="#FF959595" Opacity="0.7" />
+        </Border.Effect>
+        <Grid>
+            <TextBlock Name="DialogTitle" Text="__DIALOGTITLE__" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,6,0,0" />
+            <DockPanel Margin="22,48,24,24">
+                <TextBlock DockPanel.Dock="Top" Name="H1" Text="__H1__" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0" FontSize="27" />
+                <DockPanel DockPanel.Dock="Top">
+                    <Viewbox Name="ErrorIcon" DockPanel.Dock="Left" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Width="32" Stretch="Uniform" HorizontalAlignment="Center" Margin="0" Visibility="Collapsed">
+                        <Canvas Name="svg8" Width="8.4666665" Height="8.466677">
+                            <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Name="path4530" Fill="#FFDA4453" StrokeThickness="0.38186711" Stroke="#FFDA4453" StrokeLineJoin="Miter" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat">
+                                <Path.Data>
+                                    <PathGeometry Figures="m 4.233334 0.19093356 c -2.2325595 0 -4.04240044 1.80984004 -4.04240044 4.04240004 0 2.23257 1.80984094 4.04241 4.04240044 4.04241 2.2325597 0 4.0423991 -1.80984 4.0423991 -4.04241 0 -2.23256 -1.8098394 -4.04240004 -4.0423991 -4.04240004 z m -1.9241831 1.15498004 1.9241831 1.92418 1.9241815 -1.92418 0.963223 0.96322 -1.9241829 1.92419 1.9241829 1.92418 -0.963223 0.96321 -1.9241815 -1.92417 -1.9241831 1.92417 -0.9632231 -0.96321 1.9241831 -1.92418 -1.9241831 -1.92419 z" FillRule="NonZero" />
+                                </Path.Data>
+                            </Path>
+                        </Canvas>
+                    </Viewbox>
+                    <TextBlock DockPanel.Dock="Left" Name="DialogText" Text="__DIALOGTEXT__" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,8,0,0" FontSize="15" />
+                </DockPanel>
+                <TextBox DockPanel.Dock="Top" Name="Input" Visibility="Hidden" Margin="0,10" FontSize="15" />
+                <StackPanel DockPanel.Dock="Bottom" Margin="0" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <Button Name="CancelButton" Content="__CANCELTEXT__" HorizontalAlignment="Right" Margin="0,0,24,0" VerticalAlignment="Bottom" FontSize="15" FontFamily="Segoe UI Semibold" />
+                    <Button Name="ConfirmButton" Content="__CONFIRMTEXT__" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Bottom" IsDefault="True" FontSize="15" FontFamily="Segoe UI Semibold" />
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Border>
+</Window>
