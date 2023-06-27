@@ -4,7 +4,8 @@ Here are a few screenshots of this GUI template in use.
 
 - Animated Example.
 
-    [![Example Interaction](ExampleWindow-MenuClosed.png)](https://github.com/nct911/PoSH-GUI-Template/assets/47639921/f750a615-d92a-44f4-a6f1-ddc23123453a)
+    [![Example Interaction](ExampleWindow-MenuClosed.png)](https://github.com/nct911/PoSH-GUI-Template/assets/47639921/88465309-dab7-41e0-9069-2fc36b3eef22
+)
 - An example window with the menu closed.
 
     ![Example With Menu Closed](ExampleWindow-MenuClosed.png)
