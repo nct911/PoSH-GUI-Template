@@ -86,7 +86,7 @@ Copyright 2023 NCT 9-1-1
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                             <DoubleAnimation Name="BurgerFlipper" Storyboard.TargetName="MenuButtonRotate" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.25" AutoReverse="False" />
-                                            <DoubleAnimation Name="BlurPanel"     Storyboard.TargetName="BlurEffect"       Storyboard.TargetProperty="Radius" From="0" To="10"  Duration="0:0:0.25" AutoReverse="False" />
+                                            <DoubleAnimation Name="BlurPanel"     Storyboard.TargetName="MainDockBlur"       Storyboard.TargetProperty="Radius" From="0" To="10"  Duration="0:0:0.25" AutoReverse="False" />
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </BeginStoryboard>

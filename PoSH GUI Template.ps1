@@ -1539,9 +1539,9 @@ Copyright 2023 NCT 9-1-1
                         </Grid.ColumnDefinitions>
                         <Viewbox Grid.Column="0" Stretch="Uniform" Height="{TemplateBinding Height}">
                             <Border x:Name="bk" Background="#FFEDEDED" BorderBrush="#FF858585"
-                                        BorderThickness="1" CornerRadius="10" MinWidth="35" Height="20">
-                                <Ellipse x:Name="ep" Fill="#FF5A5A5A" HorizontalAlignment="Left"
-                                            Margin="2" Width="14" Height="14" />
+                                        BorderThickness="1" CornerRadius="10" Width="35" Height="20">
+                                <Ellipse x:Name="ep" Fill="#FF5A5A5A" 
+                                            Margin="0,2,14,2" Width="14" Height="14" />
                             </Border>
                         </Viewbox>
                         <ContentPresenter x:Name="contentPresenter" Grid.Column="1"
@@ -1552,20 +1552,83 @@ Copyright 2023 NCT 9-1-1
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger  Property="IsChecked" Value="true">
+                        <Trigger  Property="IsEnabled" Value="false">
+                            <Setter TargetName="contentPresenter" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="bk" Property="BorderBrush" Value="#FFD5D5D5" />
+                            <Setter TargetName="ep" Property="Fill" Value="#FFD5D5D5" />
+                        </Trigger>
+
+                        <Trigger Property="IsChecked" Value="true">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ParallelTimeline>
+                                            <ThicknessAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="BorderThickness" From="1,1,1,1" To="0,0,0,0" Duration="0:0:0.125" AutoReverse="False" />
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ep" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="0,2,14,2" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.125" Value="14,2,3,2" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                            <ColorAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                    From="#FFEDEDED"
+                                    To="#FF005FB8"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.125"/>
+                                            <ColorAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"
+                                    From="#FF858585"
+                                    To="#FF005FB8"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.125"/>
+                                            <ColorAnimation Storyboard.TargetName="ep" Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                                    From="#FF5A5A5A"
+                                    To="#FFFFFFFF"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.125"/>
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ParallelTimeline>
+                                            <ThicknessAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="BorderThickness" From="0,0,0,0" To="1,1,1,1" Duration="0:0:0.125" AutoReverse="False" />
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetName="ep" Storyboard.TargetProperty="Margin" BeginTime="00:00:00">
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00" Value="14,2,0,2" />
+                                                <SplineThicknessKeyFrame KeyTime="00:00:00.125" Value="0,2,14,2" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                            <ColorAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                    To="#FFEDEDED"
+                                    From="#FF005FB8"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.125"/>
+                                            <ColorAnimation Storyboard.TargetName="bk" Storyboard.TargetProperty="BorderBrush.(SolidColorBrush.Color)"
+                                    To="#FF858585"
+                                    From="#FF005FB8"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.125"/>
+                                            <ColorAnimation Storyboard.TargetName="ep" Storyboard.TargetProperty="Fill.(SolidColorBrush.Color)"
+                                    To="#FF5A5A5A"
+                                    From="#FFFFFFFF"
+                                    FillBehavior="Stop" 
+                                    Duration="0:0:0.0625"/>
+
+                                        </ParallelTimeline>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                             <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right" />
                         </Trigger>
 
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsChecked" Value="true" />
-                                <Condition Property="IsEnabled" Value="true" />
+                                <Condition Property="IsChecked" Value="True" />
+                                <Condition Property="IsEnabled" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="ep" Property="HorizontalAlignment" Value="Right" />
                             <Setter Property="Background" TargetName="bk" Value="#FF005FB8" />
                             <Setter Property="BorderBrush" TargetName="bk" Value="#FF005FB8" />
                             <Setter Property="Fill" TargetName="ep" Value="#FFFFFFFF" />
                         </MultiTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -2139,7 +2202,7 @@ Copyright 2023 NCT 9-1-1
                     <Grid SnapsToDevicePixels="true">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="4"
                                     BorderThickness="{TemplateBinding BorderThickness}" Grid.ColumnSpan="4"
-                                    Grid.Row="1" Grid.RowSpan="3" Background="White">
+                                    Grid.Row="1" Grid.RowSpan="3" Background="{TemplateBinding Background}">
                             <DockPanel>
                                 <ContentPresenter DockPanel.Dock="Top"
                                             Margin="{TemplateBinding Padding}" ContentSource="Header"
