@@ -110,7 +110,7 @@ public static void SetTop(IntPtr hWindow)
                 Invoke-Async @AsyncParameters
 
                 .NOTES
-                It's more reliable to pass single values than copmlex objects duje to the way PowerShell handles value/reference passing with objects
+                It's more reliable to pass single values than copmlex objects due to the way PowerShell handles value/reference passing with objects
 
                 .INPUTS
                 Variables, Code
@@ -1133,7 +1133,7 @@ public static void SetTop(IntPtr hWindow)
 <!--
 
 File: MainWindow.xaml
-Modified Date: 2023-06-07
+Modified Date: 2023-12-07
 Author: Jeremy Crabtree <jcrabtree at nct911 org> / <jeremylc at gmail>
 Purpose: Main Program window for the PoSH GUI Template
 Copyright 2023 NCT 9-1-1
@@ -1218,7 +1218,7 @@ Copyright 2023 NCT 9-1-1
                                                 </DoubleAnimation.EasingFunction>
                                             </DoubleAnimation>
                                             <DoubleAnimation Name="BurgerFlipper" Storyboard.TargetName="MenuButtonRotate" Storyboard.TargetProperty="Angle" From="0" To="90" Duration="0:0:0.25" AutoReverse="False" />
-                                            <DoubleAnimation Name="BlurPanel"     Storyboard.TargetName="MainDockBlur"     Storyboard.TargetProperty="Radius" From="0" To="10"  Duration="0:0:0.25" AutoReverse="False" />
+                                            <DoubleAnimation Name="BlurPanel"     Storyboard.TargetName="MainDockBlur"       Storyboard.TargetProperty="Radius" From="0" To="10"  Duration="0:0:0.25" AutoReverse="False" />
                                         </ParallelTimeline>
                                     </Storyboard>
                                 </BeginStoryboard>
