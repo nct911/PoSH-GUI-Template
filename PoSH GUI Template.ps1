@@ -2986,3 +2986,36 @@ Copyright 2023 NCT 9-1-1
     })
 $psCmd.Runspace = $newRunspace
 $data = $psCmd.Invoke()
+
+#region Error Handling
+# Check for errors
+$psCmd.Streams.Error | ForEach-Object {
+    Write-Host "Line $($_.InvocationInfo.ScriptLineNumber)" -ForegroundColor Red
+    Write-Host "$($_.CategoryInfo)" -ForegroundColor Red
+    Write-Host "$($_.FullyQualifiedErrorId)" -ForegroundColor Red
+    Write-Host "$($_.InvocationInfo.Statement)" -ForegroundColor Red
+    Write-Host "$($_.Exception.Message)" -ForegroundColor Red
+}
+
+# Output other information
+$psCmd.Streams.Verbose | ForEach-Object {
+    Write-Host "`nVerbose: $($_)"
+}
+
+
+$psCmd.Streams.Debug | ForEach-Object {
+    Write-Host "`nDebug: $($_)"
+}
+
+$psCmd.Streams.Information | ForEach-Object {
+    Write-Host "`nInformation: $($_)"
+}
+
+$psCmd.Streams.Warning | ForEach-Object {
+    Write-Host "`nWarning: $($_)"
+}
+
+$psCmd.Streams.Progress | ForEach-Object {
+    Write-Host "`nProgress: $($_)"
+}
+#endregion Error Handling
